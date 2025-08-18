@@ -3,6 +3,7 @@ const baseRouter = require("./src/router/baseRouter")
 const userRouter = require("./src/router/userRouter")
 const connDb = require("./src/config/connDB")
 const server =express()
+server.use(express.json())
 
 // server.get("/",Home)
 server.use("/api/v1/",baseRouter)
