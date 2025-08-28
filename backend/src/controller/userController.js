@@ -25,8 +25,22 @@ const DeleteDataController = async(req,res)=>{
        return res.status(500).json({msg:"Sever Error!!",error:error.message})
     }
 }
+const UpdateDataController = async(req,res)=>{
+    try {
+        const {id} = req.params
+        const updateData = req.body
+        const isUpdate = await User.findByIdAndUpdate(id,updateData,{new:true})
+        if(!isUpdate) {
+            return res.status(404).json({msg:"User not found"})
+        }
+        return res.status(200).json({msg:"User Data is Updated",data:isUpdate})
+    } catch (error) {
+        return res.status(500).json({msg:"Server Error!!",error:error.message})
+    }
+}
 module.exports = {
       AddUserDataController,
       GetDataController,
       DeleteDataController,
+      UpdateDataController,
 }
